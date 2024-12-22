@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\ParentsController;
 use App\Http\Controllers\GradesController;
+use App\Http\Controllers\AbsencesController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\SchoolSubjectController;
 use App\Http\Controllers\InfoUserController;
@@ -49,16 +50,19 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('students', [StudentsController::class, 'showStudents']);
 	Route::get('parents', [ParentsController::class, 'showParents']);
 	Route::get('teachers', [StudentsController::class, 'showTeachers']);
-	Route::get('grades', [GradesController::class, 'showGrades']);
+	Route::get('grades/{student_id?}', [GradesController::class, 'showGrades']);
+	Route::get('absences/{student_id?}', [AbsencesController::class, 'showAbsences']);
 	Route::get('new-teacher', [TeacherController::class, 'createTeacher'])->name("new-teacher");
 	Route::get('show-new-school-subject', [SchoolSubjectController::class, 'showNewSchoolSubject'])->name("show-new-school-subject");
 	Route::get('new-student', [StudentsController::class, 'createStudent'])->name("new-student");
 	Route::get('new-parent', [ParentsController::class, 'createParent'])->name("new-parent");
 	Route::get('delete-teacher/{teacher_id}', [TeacherController::class, 'deleteTeacher'])->name("delete-teacher");
 	Route::get('delete-grade/{grade_id}', [GradesController::class, 'deleteGrade'])->name("delete-grade");
+	Route::get('delete-absence/{absence_id}', [AbsencesController::class, 'deleteAbsence'])->name("delete-absence");
 	Route::get('delete-subject/{subject_id}', [SchoolSubjectController::class, 'deleteSubject'])->name("delete-subject");
 	Route::post('create-new-teacher', [TeacherController::class, 'createNewTeacher'])->name("create-new-teacher");
 	Route::post('store-grade', [GradesController::class, 'createNewGrade'])->name("store-grade");
+	Route::post('store-absence', [AbsencesController::class, 'createNewAbsence'])->name("store-absence");
 	Route::post('store-parent-opinion', [GradesController::class, 'leaveParentOpinion'])->name("store-parent-opinion");
 	Route::post('create-new-subject', [SchoolSubjectController::class, 'createNewSubject'])->name("create-new-subject");
 	Route::post('create-new-student', [StudentsController::class, 'createNewStudent'])->name("create-new-student");
@@ -67,6 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/delete-student/{student_id}', [StudentsController::class, 'deleteStudent'])->name('delete-student');
 	Route::get('/delete-parent/{parent_id}', [ParentsController::class, 'deleteParent'])->name('delete-parent');
 	Route::get('/show-leave-grade/{student_id}', [GradesController::class, 'showLeaveGrade'])->name('show-leave-grade');
+	Route::get('/show-leave-absence/{student_id}', [AbsencesController::class, 'showLeaveAbsence'])->name('show-leave-absence');
 	Route::get('show-leave-opinion', [GradesController::class, 'showLeaveOpinion'])->name('show-leave-opinion');
 
 	Route::get('tables', function () {

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Students;
 use App\Models\Grades;
 use App\Models\Teachers;
+use App\Models\Parents;
+use App\Models\Absences;
 use App\Models\SchoolSubjects;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -36,6 +38,15 @@ class StudentsController extends Controller
                 } else {
                     $student->annual_average = "No grades";
                 }
+
+                $absences = Absences::where('student_id', $student->id)->get();
+                $abss = 0;
+                if (count($absences)) {
+                    foreach ($absences as $abs) {
+                        $abss++;
+                    }
+                }
+                $student->absences = $abss;
             }
         }
         return view('laravel-examples/students', ['students' => $students]);
@@ -73,7 +84,15 @@ class StudentsController extends Controller
         $student = Students::where("id", $student_id)->first();
         if ($student) {
             $student->delete();
-            session()->flash('success', 'Student '.$student->name.' deleted successfully.');
+            $parent = Parents::where("student_id", $student_id)->first();
+            $parent->delete();
+            $grades = Grades::where("student_id", $student_id)->get();
+            if (count($grades)) {
+                foreach ($grades as $gr) {
+                    $gr->delete();
+                }
+            }
+            session()->flash('success', 'Student '.$student->name.', his notes and his parent '.$parent->name.' deleted successfully.');
         }
         return redirect()->to('students');
     }

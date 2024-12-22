@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Students;
 use App\Models\Parents;
 use App\Models\Teachers;
+use App\Models\Grades;
 use App\Models\SchoolSubjects;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -58,7 +59,15 @@ class ParentsController extends Controller
         $parent = Parents::where("id", $parent_id)->first();
         if ($parent) {
             $parent->delete();
-            session()->flash('success', 'Parent '.$parent->name.' deleted successfully.');
+            $student = Students::where("id", $parent->student_id)->first();
+            $student->delete();
+            $grades = Grades::where("student_id", $student->id)->get();
+            if (count($grades)) {
+                foreach ($grades as $gr) {
+                    $gr->delete();
+                }
+            }
+            session()->flash('success', 'Parent '.$parent->name.', student '.$student->name.' and his grades deleted successfully.');
         }
         return redirect()->to('parents');
     }

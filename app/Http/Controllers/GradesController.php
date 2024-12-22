@@ -11,13 +11,16 @@ use Illuminate\Support\Carbon;
 
 class GradesController extends Controller
 {
-    public function showGrades()
+    public function showGrades($student_id = null)
     {
         $conditions = [];
         if (auth()->user()->account_type == "student") {
             $conditions['student_id'] = auth()->user()->external_user_id;
         } elseif (auth()->user()->account_type == "teacher") {
             $conditions['teacher_id'] = auth()->user()->external_user_id;
+        }
+        if($student_id) {
+            $conditions['student_id'] = $student_id;
         }
         $grades = Grades::where($conditions)->get();
         if (count($grades)) {
@@ -91,11 +94,18 @@ class GradesController extends Controller
     public function deleteGrade($grade_id = null)
     {
         $grade = Grades::where("id", $grade_id)->first();
-        $student = Students::where("id", $grade->student_id)->first();
+        if (isset($grade->student_id)) {
+            $student = Students::where("id", $grade->student_id)->first();
+        }
         
         if ($grade) {
             $grade->delete();
-            session()->flash('success', 'Grade '.$grade->grade.' for student '.$student->name.' deleted successfully.');
+            if ($student) {
+                $txt = 'Grade '.$grade->grade.' for student '.$student->name.' deleted successfully.';
+            } else {
+                $txt = 'Grade '.$grade->grade.' deleted successfully.';
+            }
+            session()->flash('success', $txt);
         }
         return redirect()->to('grades');
     }

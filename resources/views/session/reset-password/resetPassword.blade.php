@@ -17,7 +17,7 @@
                             <div>
                                 <label for="email">Email</label>
                                 <div class="">
-                                    <input id="email" name="email" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
+                                    <input id="email" readonly name="email" value="<?=$_GET['email']?>" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
                                     @error('email')
                                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Students;
 use App\Models\Teachers;
+use App\Models\Grades;
 use App\Models\SchoolSubjects;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +22,13 @@ class TeacherController extends Controller
         $teacher = Teachers::where("id", $teacher_id)->first();
         if ($teacher) {
             $teacher->delete();
-            session()->flash('success', 'Teacher '.$teacher->name.' deleted successfully.');
+            $grades = Grades::where("teacher_id", $teacher->id)->get();
+            if (count($grades)) {
+                foreach ($grades as $gr) {
+                    $gr->delete();
+                }
+            }
+            session()->flash('success', 'Teacher '.$teacher->name.' and the notes he made deleted successfully.');
         }
         return redirect()->to('teachers');
     }

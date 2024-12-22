@@ -58,13 +58,25 @@
                                         Annual Average
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        View Grades
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Action
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Email
                                     </th> 
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Creation Date
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Action
+                                        Absences
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        View Absences
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Leave Absence
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Delete
@@ -84,15 +96,36 @@
                                         <p class="text-xs font-weight-bold mb-0">{{$student->annual_average}} <i class='{{$student->annual_average > 5 ? " fa-solid fa-face-smile " : "fa-solid fa-face-sad-tear"}}'></i></p>
                                     </td>
                                     <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">{{$student->email}}</p>
-                                    </td>
-                                    <td class="text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">{{$student->created_at}}</span>
+                                        <a href="{{url('grades', ['student_id' => $student->id])}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="View Grades">
+                                            <i class="fas fa-eye text-secondary"></i> View Grades
+                                        </a> 
                                     </td>
                                     <td class="text-center">
                                     @if(auth()->user()->account_type == "admin" || auth()->user()->account_type == "teacher")
                                         <a href="{{route('show-leave-grade', ['student_id' => $student->id])}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Leave a School Grade">
                                             <i class="fas fa-user-edit text-secondary"></i> Leave a School Grade
+                                        </a> 
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        <p class="text-xs font-weight-bold mb-0">{{$student->email}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">{{$student->created_at}}</span>
+                                    </td>
+                                    
+                                    <td class="text-center">
+                                        <p class="text-xs font-weight-bold mb-0">{{$student->absences}}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="{{url('absences', ['student_id' => $student->id])}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="View Absences">
+                                            <i class="fas fa-eye text-secondary"></i> View Absences
+                                        </a> 
+                                    </td>
+                                    <td class="text-center">
+                                    @if(auth()->user()->account_type == "admin" || auth()->user()->account_type == "teacher")
+                                        <a href="{{route('show-leave-absence', ['student_id' => $student->id])}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Leave Absence">
+                                            <i class="fas fa-user-edit text-secondary"></i> Leave absence
                                         </a> 
                                         @endif
                                     </td>
@@ -105,7 +138,6 @@
                                                 
                                             </span>
                                         </a>
-                                        
                                     @endif
                                     </td>
                                 </tr>
