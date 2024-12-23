@@ -35,6 +35,7 @@ class StudentsController extends Controller
                     } else {
                         $student->annual_average = $student->annual_average;
                     }
+                    $student->annual_average = round($student->annual_average, 2);
                 } else {
                     $student->annual_average = "No grades";
                 }
