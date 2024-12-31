@@ -36,7 +36,7 @@
       <li class="nav-item pb-2">
     <a class="nav-link {{ (Request::is('user-profile') ? 'active' : '') }}" href="{{ url('user-profile') }}">
         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fas fa-user-circle text-dark"></i> <!-- Clasa pentru iconiță -->
+            <i class="fas fa-user-circle {{ (Request::is('user-profile') ? 'text-white' : 'text-dark') }}"></i> <!-- Clasa pentru iconiță -->
         </div>
         <span class="nav-link-text ms-1">User Profile</span>
     </a>
@@ -47,7 +47,7 @@
       <li class="nav-item pb-2">
     <a class="nav-link {{ (Request::is('school_subjects') ? 'active' : '') }}" href="{{ url('school_subjects') }}">
         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fas fa-book-open text-dark"></i> <!-- Clasa pentru iconiță -->
+            <i class="fas fa-book-open  {{ (Request::is('school_subjects') ? 'text-white' : 'text-dark') }}"></i> <!-- Clasa pentru iconiță -->
         </div>
         <span class="nav-link-text ms-1">School Subjects</span>
     </a>
@@ -55,7 +55,7 @@
       <li class="nav-item pb-2">
     <a class="nav-link {{ (Request::is('grades') ? 'active' : '') }}" href="{{ url('grades') }}">
         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fas fa-graduation-cap text-dark"></i> <!-- Clasa pentru iconiță -->
+            <i class="fas fa-graduation-cap  {{ (Request::is('grades') ? 'text-white' : 'text-dark') }}"></i> <!-- Clasa pentru iconiță -->
         </div>
         <span class="nav-link-text ms-1">Grades</span>
     </a>
@@ -63,7 +63,7 @@
     <li class="nav-item pb-2">
     <a class="nav-link {{ (Request::is('absences') ? 'active' : '') }}" href="{{ url('absences') }}">
         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fas fa-calendar-times text-dark"></i> <!-- Clasa pentru iconiță -->
+            <i class="fas fa-calendar-times  {{ (Request::is('absences') ? 'text-white' : 'text-dark') }}"></i> <!-- Clasa pentru iconiță -->
         </div>
         <span class="nav-link-text ms-1">Absences</span>
     </a>
@@ -75,7 +75,7 @@
       <li class="nav-item pb-2">
     <a class="nav-link {{ (Request::is('students') ? 'active' : '') }}" href="{{ url('students') }}">
         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fas fa-user-graduate text-dark"></i> <!-- Clasa pentru iconiță -->
+            <i class="fas fa-user-graduate  {{ (Request::is('students') ? 'text-white' : 'text-dark') }}"></i> <!-- Clasa pentru iconiță -->
         </div>
         <span class="nav-link-text ms-1">Students</span>
     </a>
@@ -83,7 +83,7 @@
 <li class="nav-item pb-2">
     <a class="nav-link {{ (Request::is('parents') ? 'active' : '') }}" href="{{ url('parents') }}">
         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fas fa-users text-dark"></i> <!-- Clasa pentru iconiță -->
+            <i class="fas fa-users  {{ (Request::is('parents') ? 'text-white' : 'text-dark') }}"></i> <!-- Clasa pentru iconiță -->
         </div>
         <span class="nav-link-text ms-1">Parents</span>
     </a>
@@ -91,7 +91,7 @@
 <li class="nav-item pb-2">
     <a class="nav-link {{ (Request::is('teachers') ? 'active' : '') }}" href="{{ url('teachers') }}">
         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fas fa-chalkboard-teacher text-dark"></i> <!-- Clasa pentru iconiță -->
+            <i class="fas fa-chalkboard-teacher  {{ (Request::is('teachers') ? 'text-white' : 'text-dark') }}"></i> <!-- Clasa pentru iconiță -->
         </div>
         <span class="nav-link-text ms-1">Teachers</span>
     </a>
